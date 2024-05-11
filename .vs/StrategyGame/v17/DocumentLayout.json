@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\MyUnityProject\\StrategyGame\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|d:\\myunityproject\\strategygame\\assets\\scripts\\base.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|D:\\MyUnityProject\\StrategyGame\\assets\\scripts\\unit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\unit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|d:\\myunityproject\\strategygame\\assets\\scripts\\waitingarea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\waitingarea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|d:\\myunityproject\\strategygame\\assets\\scripts\\resource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\resource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|d:\\myunityproject\\strategygame\\assets\\scripts\\resourcesearch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\resourcesearch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ResourceSearch.cs",
+              "DocumentMoniker": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\ResourceSearch.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ResourceSearch.cs",
+              "ToolTip": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\ResourceSearch.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ResourceSearch.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAwAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-11T14:52:28.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Resource.cs",
+              "DocumentMoniker": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\Resource.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Resource.cs",
+              "ToolTip": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\Resource.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Resource.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-11T14:52:23.918Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WaitingArea.cs",
+              "DocumentMoniker": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\WaitingArea.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\WaitingArea.cs",
+              "ToolTip": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\WaitingArea.cs",
+              "RelativeToolTip": "Assets\\Scripts\\WaitingArea.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-11T12:56:57.383Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Unit.cs",
+              "DocumentMoniker": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\Unit.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Unit.cs",
+              "ToolTip": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\Unit.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Unit.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACsAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-09T12:16:44.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Base.cs",
+              "DocumentMoniker": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\Base.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Base.cs",
+              "ToolTip": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\Base.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Base.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAYwFEAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-09T12:27:15.402Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
