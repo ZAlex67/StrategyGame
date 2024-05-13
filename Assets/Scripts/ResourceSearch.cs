@@ -6,7 +6,7 @@ public class ResourceSearch : MonoBehaviour
     private Collider[] _spheres;
     private float _radius = 100f;
 
-    public event Action<Resource> Searching;
+    public event Action<Resource> SearchedResources;
     
     public void MapInspection()
     {
@@ -16,7 +16,7 @@ public class ResourceSearch : MonoBehaviour
         {
             if (sphere.TryGetComponent(out Resource resource))
             {
-                Searching?.Invoke(resource);
+                SearchedResources?.Invoke(resource);
             }
         }
     }

@@ -11,15 +11,15 @@ public class Storage : MonoBehaviour
 
     private void OnEnable()
     {
-        _base.TookResource += OnTake;
+        _base.TookResource += OnTookResource;
     }
 
     private void OnDisable()
     {
-        _base.TookResource -= OnTake;
+        _base.TookResource -= OnTookResource;
     }
 
-    private void OnTake()
+    private void OnTookResource()
     {
         _resourceNumber++;
         NumberChanged?.Invoke(_resourceNumber);

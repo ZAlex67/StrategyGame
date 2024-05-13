@@ -20,6 +20,11 @@ public class SpawnerResources : MonoBehaviour
             maxSize: _poolMaxSize);
     }
 
+    private void Start()
+    {
+        GetResourse();
+    }
+
     private void ActionOnGet(Resource resourse)
     {
         float minPositionX = 5f;
@@ -32,11 +37,6 @@ public class SpawnerResources : MonoBehaviour
 
         resourse.transform.position = newPosition;
         resourse.gameObject.SetActive(true);
-    }
-
-    private void Start()
-    {
-        GetResourse();
     }
 
     private void GetResourse()

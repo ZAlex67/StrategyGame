@@ -15,6 +15,11 @@ public class Unit : MonoBehaviour
     {
         DG.Tweening.DOTween.SetTweensCapacity(tweenersCapacity: 20000, sequencesCapacity: 200);
 
+        if (_currentResource.InUnit == false)
+        {
+            transform.DOMove(_currentResource.transform.position, _duration);
+        }
+
         if (_currentResource.InUnit)
         {
             _currentResource.SetResource(false);

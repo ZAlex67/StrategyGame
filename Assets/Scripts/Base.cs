@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +7,11 @@ public class Base : MonoBehaviour
 {
     [SerializeField] private Unit _unit;
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private ResourceSearch _resourceSearch;
+    [SerializeField] private ResourceSearch _resourceSearcher;
     [SerializeField] private WaitingArea _waitingArea;
 
     private List<Resource> _resources;
     private List<Unit> _units;
-    private float _duration = 5f;
     private int _maxUnit = 3;
 
     public int ResourcesCount => _resources.Count;
@@ -30,7 +28,7 @@ public class Base : MonoBehaviour
     {
         if (_resources.Count == 0)
         {
-            _resourceSearch.MapInspection();
+            _resourceSearcher.MapInspection();
         }
 
         if (_resources.Count > 0 && _units.Count > 0)
@@ -50,47 +48,14 @@ public class Base : MonoBehaviour
         }
     }
 
-    public void Work()
-    {
-        if (_units.Count < _maxUnit)
-        {
-            InitUnit();
-        }
-    }
-
     private void OnEnable()
     {
-        _resourceSearch.Searching += OnAddResources;
+        _resourceSearcher.SearchedResources += OnSearchedResources;
     }
 
     private void OnDisable()
     {
-        _resourceSearch.Searching -= OnAddResources;
-    }
-
-    private void MoveToResource(Unit unit)
-    {
-        Resource resource = _resources[Random.Range(0, _resources.Count)];
-        _resources.Remove(resource);
-
-        //unit.transform.DOLookAt(resource.transform.position, 10f);
-        unit.transform.DOMove(resource.transform.position, _duration);
-        unit.SetStatus(false);
-        unit.GetResources(resource);
-        unit.GetBasePosition(this);
-        unit.GetWaitingAreaPosition(_waitingArea);
-        Debug.Log(_resources.Count);
-    }
-
-    private void InitUnit()
-    {
-        Unit unit = Instantiate(_unit, _spawnPoint);
-        _units.Add(unit);
-    }
-
-    private void OnAddResources(Resource resource)
-    {
-        _resources.Add(resource);
+        _resourceSearcher.SearchedResources -= OnSearchedResources;
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -99,5 +64,35 @@ public class Base : MonoBehaviour
         {
             TookResource?.Invoke();
         }
+    }
+
+    public void Work()
+    {
+        if (_units.Count < _maxUnit)
+        {
+            InitUnit();
+        }
+    }
+
+    private void MoveToResource(Unit unit)
+    {
+        Resource resource = _resources[Random.Range(0, _resources.Count)];
+        _resources.Remove(resource);
+
+        unit.SetStatus(false);
+        unit.GetResources(resource);
+        unit.GetBasePosition(this);
+        unit.GetWaitingAreaPosition(_waitingArea);
+    }
+
+    private void InitUnit()
+    {
+        Unit unit = Instantiate(_unit, _spawnPoint);
+        _units.Add(unit);
+    }
+
+    private void OnSearchedResources(Resource resource)
+    {
+        _resources.Add(resource);
     }
 }
