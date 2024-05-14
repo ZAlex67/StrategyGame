@@ -3,16 +3,18 @@ using UnityEngine;
 
 public class ResourceSearch : MonoBehaviour
 {
-    private Collider[] _spheres;
+    [SerializeField] private LayerMask _layerMask;
+
+    private Collider[] _spheresColliders;
     private float _radius = 100f;
 
     public event Action<Resource> SearchedResources;
     
     public void MapInspection()
     {
-        _spheres = Physics.OverlapSphere(transform.position, _radius);
+        _spheresColliders = Physics.OverlapSphere(transform.position, _radius, _layerMask);
 
-        foreach (var sphere in _spheres)
+        foreach (var sphere in _spheresColliders)
         {
             if (sphere.TryGetComponent(out Resource resource))
             {

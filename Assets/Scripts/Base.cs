@@ -3,49 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(Storage))]
 public class Base : MonoBehaviour
 {
     [SerializeField] private Unit _unit;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private ResourceSearch _resourceSearcher;
-    [SerializeField] private WaitingArea _waitingArea;
 
     private List<Resource> _resources;
     private List<Unit> _units;
     private int _maxUnit = 3;
+    private Storage _storage;
 
     public int ResourcesCount => _resources.Count;
 
-    public event Action TookResource;
+    public event Action<Resource> TookResource;
 
     private void Awake()
     {
         _resources = new List<Resource>();
         _units = new List<Unit>();
+        _storage = GetComponent<Storage>();
+    }
+
+    private void Start()
+    {
+        InitUnit();
     }
 
     private void Update()
     {
-        if (_resources.Count == 0)
-        {
-            _resourceSearcher.MapInspection();
-        }
-
-        if (_resources.Count > 0 && _units.Count > 0)
-        {
-            foreach (var unit in _units)
-            {
-                if (unit.Status)
-                {
-                    MoveToResource(unit);
-                }
-            }
-        }
-
-        if (_resources.Count == 0)
-        {
-            _units.Clear();
-        }
+        MoveToResource();
     }
 
     private void OnEnable()
@@ -62,37 +50,47 @@ public class Base : MonoBehaviour
     {
         if (collision.TryGetComponent<Resource>(out Resource resource))
         {
-            TookResource?.Invoke();
+            TookResource?.Invoke(resource);
+            _storage.PutResource();
         }
     }
 
-    public void Work()
+    private void MoveToResource()
     {
-        if (_units.Count < _maxUnit)
+        if (_resources.Count > 0 && _units.Count > 0)
         {
-            InitUnit();
+            Resource resource = _resources[Random.Range(0, _resources.Count)];
+            _resources.Remove(resource);
+
+            Unit unit = _units[Random.Range(0, _units.Count)];
+            _units.Remove(unit);
+
+            unit.gameObject.SetActive(true);
+            unit.SetResources(resource);
         }
-    }
-
-    private void MoveToResource(Unit unit)
-    {
-        Resource resource = _resources[Random.Range(0, _resources.Count)];
-        _resources.Remove(resource);
-
-        unit.SetStatus(false);
-        unit.GetResources(resource);
-        unit.GetBasePosition(this);
-        unit.GetWaitingAreaPosition(_waitingArea);
+        else if (_resources.Count == 0 && _units.Count == _maxUnit)
+        {
+            _resourceSearcher.MapInspection();
+        }
     }
 
     private void InitUnit()
     {
-        Unit unit = Instantiate(_unit, _spawnPoint);
-        _units.Add(unit);
+        for (int i = 0; i < _maxUnit; i++)
+        {
+            Unit unit = Instantiate(_unit, _spawnPoint);
+            _units.Add(unit);
+            unit.SetBasePosition(this);
+        }
     }
 
     private void OnSearchedResources(Resource resource)
     {
         _resources.Add(resource);
+    }
+
+    public void AddFreeBot(Unit unit)
+    {
+        _units.Add(unit);
     }
 }

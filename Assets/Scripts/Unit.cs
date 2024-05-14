@@ -1,45 +1,25 @@
-using DG.Tweening;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    private bool _status = true;
+    [SerializeField] private float _speed;
+
+    private bool _statusPlaceResource = true;
     private Resource _currentResource;
     private Base _base;
-    private WaitingArea _waitingArea;
-    private float _duration = 5f;
 
-    public bool Status => _status;
+    public bool StatusPlaceResource => _statusPlaceResource;
 
     private void Update()
     {
-        DG.Tweening.DOTween.SetTweensCapacity(tweenersCapacity: 20000, sequencesCapacity: 200);
-
-        if (_currentResource.InUnit == false)
+        if (_statusPlaceResource && _currentResource != null)
         {
-            transform.DOMove(_currentResource.transform.position, _duration);
+            transform.position = Vector3.MoveTowards(transform.position, _currentResource.transform.position, _speed * Time.deltaTime);
         }
-
-        if (_currentResource.InUnit)
+        else if (_statusPlaceResource == false)
         {
-            _currentResource.SetResource(false);
-            transform.DOMove(_base.transform.position, _duration);
-        }
-
-        if (_currentResource.transform.parent != null)
-        {
-            transform.DOMove(_base.transform.position, _duration);
-        }
-
-        if (_base.ResourcesCount == 0 && _currentResource.InUnit == true)
-        {
-            _status = true;
-        }
-
-        if (_status == true)
-        {
-            transform.DOMove(_waitingArea.transform.position, _duration);
-        }
+            transform.position = Vector3.MoveTowards(transform.position, _base.transform.position, _speed * Time.deltaTime);
+        }     
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -47,14 +27,15 @@ public class Unit : MonoBehaviour
         if (collision.TryGetComponent<Resource>(out Resource resource) && resource == _currentResource)
         {
             TakeResource(_currentResource);
-            _currentResource.SetResource(true);
+            SetStatus(false);
         }
 
-        if (collision.TryGetComponent<Base>(out Base basePoint) && _currentResource.InUnit == false)
+        if (collision.TryGetComponent<Base>(out Base basePoint) && _statusPlaceResource == false)
         {
             _currentResource.transform.parent = null;
-            _currentResource.gameObject.SetActive(false);
             SetStatus(true);
+            basePoint.AddFreeBot(this);
+            gameObject.SetActive(false);
         }
     }
 
@@ -64,23 +45,18 @@ public class Unit : MonoBehaviour
         resource.transform.position = transform.position;
     }
 
-    public void GetBasePosition(Base basePosition)
+    public void SetBasePosition(Base basePosition)
     {
         _base = basePosition;
     }
 
-    public void GetWaitingAreaPosition(WaitingArea areaPosition)
-    {
-        _waitingArea = areaPosition;
-    }
-
-    public void GetResources(Resource resource)
+    public void SetResources(Resource resource)
     {
         _currentResource = resource;
     }
 
     public void SetStatus(bool status)
     {
-        _status = status;
+        _statusPlaceResource = status;
     }
 }
