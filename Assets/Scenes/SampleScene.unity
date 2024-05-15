@@ -687,50 +687,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2063067555
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2063067557}
-  - component: {fileID: 2063067556}
-  m_Layer: 0
-  m_Name: SpawnerUnit
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2063067556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063067555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e447909ee281e948b59767aeee768b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &2063067557
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063067555}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25, y: 0, z: 31.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2111967420
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,11 +726,8 @@ MonoBehaviour:
   _poolMaxSize: 10
   _repeatRate: 1
   _base: {fileID: 17939352}
-  _minPositionX: 5
-  _maxPositionX: 45
-  _positionY: 0
-  _minPositionZ: 2
-  _maxPositionZ: 20
+  _minPosition: {x: 5, y: 0, z: 2}
+  _maxPosition: {x: 45, y: 0, z: 20}
 --- !u!4 &2111967422
 Transform:
   m_ObjectHideFlags: 0
@@ -851,6 +804,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5069602605901375598, guid: b080b9c6ee75f014b80e518aee358bf4, type: 3}
+      propertyPath: _unit
+      value: 
+      objectReference: {fileID: 6657256093743382165, guid: c87fe50d8d4ecf243956127c05befb92, type: 3}
+    - target: {fileID: 5069602605901375598, guid: b080b9c6ee75f014b80e518aee358bf4, type: 3}
       propertyPath: _spawnPoint
       value: 
       objectReference: {fileID: 1150291999}
@@ -894,4 +851,3 @@ SceneRoots:
   - {fileID: 2113726466}
   - {fileID: 1150291999}
   - {fileID: 407335139}
-  - {fileID: 2063067557}

@@ -33,7 +33,7 @@ public class Base : MonoBehaviour
 
     private void Update()
     {
-        MoveToResource();
+        SendUnitToResource();
     }
 
     private void OnEnable()
@@ -48,14 +48,14 @@ public class Base : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.TryGetComponent<Resource>(out Resource resource))
+        if (collision.TryGetComponent(out Resource resource))
         {
             TookResource?.Invoke(resource);
             _storage.PutResource();
         }
     }
 
-    private void MoveToResource()
+    private void SendUnitToResource()
     {
         if (_resources.Count > 0 && _units.Count > 0)
         {

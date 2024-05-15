@@ -7,13 +7,9 @@ public class SpawnerResources : MonoBehaviour
     [SerializeField] private int _poolCapacity = 5;
     [SerializeField] private int _poolMaxSize = 5;
     [SerializeField] private float _repeatRate = 1f;
-    [SerializeField] Base _base;
-    [SerializeField] private float _minPositionX = 5f;
-    [SerializeField] private float _maxPositionX = 45f;
-    [SerializeField] private float _positionY = 0;
-    [SerializeField] private float _minPositionZ = 2f;
-    [SerializeField] private float _maxPositionZ = 20f;
-
+    [SerializeField] private Base _base;
+    [SerializeField] private Vector3 _minPosition;
+    [SerializeField] private Vector3 _maxPosition;
 
     private ObjectPool<Resource> _pool;
 
@@ -45,7 +41,7 @@ public class SpawnerResources : MonoBehaviour
 
     private void ActionOnGet(Resource resourse)
     {
-        Vector3 newPosition = new Vector3(Random.Range(_minPositionX, _maxPositionX), _positionY, Random.Range(_minPositionZ, _maxPositionZ));
+        Vector3 newPosition = new Vector3(GetRandomPositionX(), _minPosition.y, GetRandomPositionZ());
 
         resourse.transform.position = newPosition;
         resourse.gameObject.SetActive(true);
@@ -60,5 +56,15 @@ public class SpawnerResources : MonoBehaviour
     {
         resource.transform.parent = null;   
         _pool.Release(resource);
+    }
+
+    private float GetRandomPositionX()
+    {
+        return Random.Range(_minPosition.x, _maxPosition.x);
+    }
+
+    private float GetRandomPositionZ()
+    {
+        return Random.Range(_minPosition.z, _maxPosition.z);
     }
 }
