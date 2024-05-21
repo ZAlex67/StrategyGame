@@ -7,7 +7,6 @@ public class SpawnerResources : MonoBehaviour
     [SerializeField] private int _poolCapacity = 5;
     [SerializeField] private int _poolMaxSize = 5;
     [SerializeField] private float _repeatRate = 1f;
-    [SerializeField] private Base _base;
     [SerializeField] private Vector3 _minPosition;
     [SerializeField] private Vector3 _maxPosition;
 
@@ -29,14 +28,10 @@ public class SpawnerResources : MonoBehaviour
         InvokeRepeating(nameof(GetResourse), 0f, _repeatRate);
     }
 
-    private void OnEnable()
+    public void ReleaseResourse(Resource resource)
     {
-        _base.TookResource += OnReleaseResourse;
-    }
-
-    private void OnDisable()
-    {
-        _base.TookResource -= OnReleaseResourse;
+        resource.transform.parent = null;   
+        _pool.Release(resource);
     }
 
     private void ActionOnGet(Resource resourse)
@@ -50,12 +45,6 @@ public class SpawnerResources : MonoBehaviour
     private void GetResourse()
     {
         _pool.Get();
-    }
-
-    private void OnReleaseResourse(Resource resource)
-    {
-        resource.transform.parent = null;   
-        _pool.Release(resource);
     }
 
     private float GetRandomPositionX()
