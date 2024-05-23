@@ -3,11 +3,25 @@ using UnityEngine;
 
 public class Storage : MonoBehaviour
 {
+    [SerializeField] private Base _base;
+
     private int _resourceNumber;
+    private int _unitPrice = 3;
+    private int _basePrice = 5;
 
     public int ResourceNumber => _resourceNumber;
 
     public event Action<int> NumberChanged;
+
+    private void OnEnable()
+    {
+        _base.ObjectBought += OnObjectBought;
+    }
+
+    private void OnDisable()
+    {
+        _base.ObjectBought -= OnObjectBought;
+    }
 
     public void PutResource()
     {
@@ -15,15 +29,12 @@ public class Storage : MonoBehaviour
         NumberChanged?.Invoke(_resourceNumber);
     }
 
-    public void BuyNewUnit()
+    private void OnObjectBought(int resourceNumber)
     {
-        _resourceNumber -= 3;
-        NumberChanged?.Invoke(_resourceNumber);
-    }
-
-    public void BuyNewBase()
-    {
-        _resourceNumber -= 5;
-        NumberChanged?.Invoke(_resourceNumber);
+        if (resourceNumber == _basePrice || resourceNumber == _unitPrice)
+        {
+            _resourceNumber -= resourceNumber;
+            NumberChanged?.Invoke(_resourceNumber);
+        }
     }
 }

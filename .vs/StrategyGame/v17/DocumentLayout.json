@@ -11,6 +11,10 @@
       "RelativeMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\spawnerresources.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|D:\\MyUnityProject\\StrategyGame\\assets\\scripts\\searchterrain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\searchterrain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|D:\\MyUnityProject\\StrategyGame\\assets\\scripts\\storage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\storage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,8 +31,8 @@
       "RelativeMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|D:\\MyUnityProject\\StrategyGame\\assets\\scripts\\clickterrain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\clickterrain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|d:\\myunityproject\\strategygame\\assets\\scripts\\resourcesdistributor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A475F40-555B-DA55-E890-6411BD707857}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\resourcesdistributor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,50 +42,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ClickTerrain.cs",
-              "DocumentMoniker": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\ClickTerrain.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\ClickTerrain.cs",
-              "ToolTip": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\ClickTerrain.cs",
-              "RelativeToolTip": "Assets\\Scripts\\ClickTerrain.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "DocumentIndex": 7,
+              "Title": "ResourcesDistributor.cs",
+              "DocumentMoniker": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\ResourcesDistributor.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ResourcesDistributor.cs",
+              "ToolTip": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\ResourcesDistributor.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ResourcesDistributor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-19T12:52:13.338Z",
+              "WhenOpened": "2024-05-23T04:24:28.975Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Base.cs",
               "DocumentMoniker": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\Base.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Base.cs",
               "ToolTip": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\Base.cs",
               "RelativeToolTip": "Assets\\Scripts\\Base.cs",
-              "ViewState": "AQIAAEsAAAAAAAAAAAAuwKwAAAAFAAAA",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAswBIAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-09T12:27:15.402Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Unit.cs",
               "DocumentMoniker": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\Unit.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Unit.cs",
               "ToolTip": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\Unit.cs",
               "RelativeToolTip": "Assets\\Scripts\\Unit.cs",
-              "ViewState": "AQIAAEgAAAAAAAAAAAAowCoAAAA1AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGoAAABiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-09T12:16:44.737Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ScoreView.cs",
               "DocumentMoniker": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\ScoreView.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ScoreView.cs",
@@ -94,15 +98,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Storage.cs",
               "DocumentMoniker": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\Storage.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Storage.cs",
               "ToolTip": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\Storage.cs",
               "RelativeToolTip": "Assets\\Scripts\\Storage.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAFAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-13T02:56:34.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SearchTerrain.cs",
+              "DocumentMoniker": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\SearchTerrain.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SearchTerrain.cs",
+              "ToolTip": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\SearchTerrain.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SearchTerrain.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-19T12:52:13.338Z",
               "EditorCaption": ""
             },
             {
@@ -113,7 +130,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\SpawnerResources.cs",
               "ToolTip": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\SpawnerResources.cs",
               "RelativeToolTip": "Assets\\Scripts\\SpawnerResources.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAFAAAA",
+              "ViewState": "AQIAADUAAAAAAAAAAAAswAMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-13T02:56:37.472Z",
               "EditorCaption": ""
@@ -126,7 +143,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\ResourceSearch.cs",
               "ToolTip": "D:\\MyUnityProject\\StrategyGame\\Assets\\Scripts\\ResourceSearch.cs",
               "RelativeToolTip": "Assets\\Scripts\\ResourceSearch.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABcAAAA0AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-11T14:52:28.384Z",
               "EditorCaption": ""

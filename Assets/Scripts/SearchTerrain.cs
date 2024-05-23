@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ClickTerrain : MonoBehaviour
+public class SearchTerrain : MonoBehaviour
 {
     public Action<RaycastHit> ClickedTerrain;
 
@@ -14,11 +14,9 @@ public class ClickTerrain : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit hit;
-
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
             ClickedTerrain?.Invoke(hit);
         }

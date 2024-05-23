@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -25,7 +26,7 @@ public class SpawnerResources : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(GetResourse), 0f, _repeatRate);
+        StartCoroutine(RepeatResource());
     }
 
     public void ReleaseResourse(Resource resource)
@@ -55,5 +56,16 @@ public class SpawnerResources : MonoBehaviour
     private float GetRandomPositionZ()
     {
         return Random.Range(_minPosition.z, _maxPosition.z);
+    }
+
+    private IEnumerator RepeatResource()
+    {
+        WaitForSeconds wait = new WaitForSeconds(_repeatRate);
+
+        while (true)
+        {
+            GetResourse();
+            yield return wait;
+        }
     }
 }
