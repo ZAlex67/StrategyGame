@@ -26,7 +26,7 @@ public class SpawnerResources : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(RepeatResource());
+        StartCoroutine(SpawnResource());
     }
 
     public void ReleaseResourse(Resource resource)
@@ -58,7 +58,7 @@ public class SpawnerResources : MonoBehaviour
         return Random.Range(_minPosition.z, _maxPosition.z);
     }
 
-    private IEnumerator RepeatResource()
+    private IEnumerator SpawnResource()
     {
         WaitForSeconds wait = new WaitForSeconds(_repeatRate);
 

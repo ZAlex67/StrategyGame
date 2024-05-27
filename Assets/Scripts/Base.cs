@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Base : MonoBehaviour
 {
@@ -9,13 +7,11 @@ public class Base : MonoBehaviour
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private ResourceSearch _resourceSearcher;
     [SerializeField] private Flag _flagPrefab;
-    [SerializeField] private SearchTerrain _clickTerrain;
+    [SerializeField] private TerrainSearcher _clickTerrain;
     [SerializeField] private SpawnerResources _spawner;
     [SerializeField] private Storage _storage;
     [SerializeField] private ResourcesDistributor _resourcesDistributor;
 
-    private List<Resource> _resources;
-    private List<Resource> _resourcesForUnit;
     private List<Unit> _units;
     private int _maxUnit = 3;
     private Camera _camera;
@@ -24,15 +20,10 @@ public class Base : MonoBehaviour
     private int _unitsCount = 6;
     private int _basePrice = 5;
     private int _unitPrice = 3;
-
-    public event Action<int> ObjectBought;
-
-    public int ResourcesCount => _resources.Count;
+    private bool _isNewBase = false;
 
     private void Awake()
     {
-        _resources = new List<Resource>();
-        _resourcesForUnit = new List<Resource>();
         _units = new List<Unit>();
         _camera = Camera.main;
     }
@@ -49,21 +40,20 @@ public class Base : MonoBehaviour
 
     private void Start()
     {
+        _storage.PutResource(-_storage.ResourceNumber);
         InitUnit();
     }
 
     private void Update()
     {
-        if (_storage.ResourceNumber >= _basePrice && _flag != null)
+        if (_storage.ResourceNumber >= _basePrice && _flag != null && _isNewBase)
         {
             SendUnitToCreateBase();
-            ObjectBought?.Invoke(_basePrice);
-            _flag = null;
         }
         else if (_storage.ResourceNumber >= _unitPrice && _maxUnit < _unitsCount && _flag == null)
         {
             CreateNewUnit();
-            ObjectBought?.Invoke(_unitPrice);
+            _storage.PutResource(-_unitPrice);
             _maxUnit++;
         }
         else
@@ -74,10 +64,13 @@ public class Base : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        int _resourceNumber = 1;
+
         if (collision.TryGetComponent(out Resource resource))
         {
             _spawner.ReleaseResourse(resource);
-            _storage.PutResource();
+            _storage.PutResource(_resourceNumber);
+            _resourcesDistributor.RemoveResource(resource);
         }
     }
 
@@ -87,7 +80,7 @@ public class Base : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            if (hit.collider.TryGetComponent(out Base basePoint))
+            if (hit.collider.TryGetComponent(out Base basePoint) && _isSelected == false)
             {
                 if (_isSelected)
                 {
@@ -106,9 +99,14 @@ public class Base : MonoBehaviour
         _units.Add(unit);
     }
 
+    public void CreateNewBase()
+    {
+        _isNewBase = false;
+    }
+
     private void OnClickedTarrain(RaycastHit raycastHit)
     {
-        if (raycastHit.collider.TryGetComponent(out SearchTerrain terrain) && _isSelected && Input.GetMouseButtonUp(0))
+        if (raycastHit.collider.TryGetComponent(out TerrainSearcher terrain) && _isSelected && Input.GetMouseButtonUp(0))
         {
             if (_flag == null)
             {
@@ -119,6 +117,7 @@ public class Base : MonoBehaviour
                 _flag.transform.position = raycastHit.point;
             }
 
+            _isNewBase = true;
             _isSelected = false;
         }
     }
@@ -130,30 +129,28 @@ public class Base : MonoBehaviour
             Unit unit = _units[Random.Range(0, _units.Count)];
             _units.Remove(unit);
 
+            _isNewBase = false;
+            _storage.PutResource(-_basePrice);
             unit.SendCreateNewBase();
             unit.gameObject.SetActive(true);
-            unit.SetFlag(_flag);
+            unit.MoveToFlag(_flag);
         }
     }
 
     private void SendUnitToResource()
     {
-        if (_units.Count > 0 && _resources.Count > 0)
+        if (_units.Count > 0)
         {
-            Resource resource = _resources[Random.Range(0, _resources.Count)];
-            _resources.Remove(resource);
+            Resource resource = _resourcesDistributor.GiveResourse();
 
-            _resourcesForUnit.Add(resource);
+            if (resource != null)
+            {
+                Unit unit = _units[Random.Range(0, _units.Count)];
+                _units.Remove(unit);
 
-            Unit unit = _units[Random.Range(0, _units.Count)];
-            _units.Remove(unit);
-
-            unit.gameObject.SetActive(true);
-            unit.SetResources(resource);
-        }
-        else if (_resources.Count == 0)
-        {
-            GetNewResourse();
+                unit.gameObject.SetActive(true);
+                unit.MoveToResource(resource);
+            }
         }
     }
 
@@ -172,15 +169,5 @@ public class Base : MonoBehaviour
         Unit unit = Instantiate(_unit, _spawnPoint);
         _units.Add(unit);
         unit.SetBasePosition(this);
-    }
-
-    private void GetNewResourse()
-    {
-        Resource resource = _resourcesDistributor.GiveResourse();
-
-        if (_resourcesForUnit.Contains(resource) == false)
-        {
-            _resources.Add(resource);
-        }
     }
 }

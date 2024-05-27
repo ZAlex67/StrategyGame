@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class SearchTerrain : MonoBehaviour
+public class TerrainSearcher : MonoBehaviour
 {
     public Action<RaycastHit> ClickedTerrain;
 
@@ -12,7 +12,7 @@ public class SearchTerrain : MonoBehaviour
         _camera = Camera.main;
     }
 
-    private void Update()
+    private void OnMouseUp()
     {
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 

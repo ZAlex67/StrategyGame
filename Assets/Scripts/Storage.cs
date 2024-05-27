@@ -3,38 +3,18 @@ using UnityEngine;
 
 public class Storage : MonoBehaviour
 {
-    [SerializeField] private Base _base;
-
-    private int _resourceNumber;
-    private int _unitPrice = 3;
-    private int _basePrice = 5;
-
-    public int ResourceNumber => _resourceNumber;
+    public int ResourceNumber { get; private set; }
 
     public event Action<int> NumberChanged;
 
-    private void OnEnable()
+    public void PutResource(int resourceNumber)
     {
-        _base.ObjectBought += OnObjectBought;
-    }
+        int resource = 1;
 
-    private void OnDisable()
-    {
-        _base.ObjectBought -= OnObjectBought;
-    }
-
-    public void PutResource()
-    {
-        _resourceNumber++;
-        NumberChanged?.Invoke(_resourceNumber);
-    }
-
-    private void OnObjectBought(int resourceNumber)
-    {
-        if (resourceNumber == _basePrice || resourceNumber == _unitPrice)
+        if (ResourceNumber >= resourceNumber || resourceNumber == resource)
         {
-            _resourceNumber -= resourceNumber;
-            NumberChanged?.Invoke(_resourceNumber);
+            ResourceNumber += resourceNumber;
+            NumberChanged?.Invoke(ResourceNumber);
         }
     }
 }

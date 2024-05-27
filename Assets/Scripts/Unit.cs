@@ -10,14 +10,25 @@ public class Unit : MonoBehaviour
     private Resource _currentResource;
     private Base _base;
     private Flag _flag;
-    private bool _createNewBase = false;
+    private bool _isCreateNewBase = false;
     private Coroutine _coroutine;
 
     private void OnTriggerEnter(Collider collision)
     {
-        TakeResource(collision);
-        PutInBase(collision);
-        TakeFlag(collision);
+        if (collision.TryGetComponent(out Resource resource) && resource == _currentResource)
+        {
+            TakeResource(collision);
+        }
+
+        if (collision.TryGetComponent(out Base basePoint) && _hasResource)
+        {
+            PutInBase(basePoint);
+        }
+
+        if (collision.TryGetComponent(out Flag flag) && _isCreateNewBase && flag == _flag)
+        {
+            TakeFlag(flag);
+        }
     }
 
     public void SetBasePosition(Base basePosition)
@@ -25,19 +36,22 @@ public class Unit : MonoBehaviour
         _base = basePosition;
     }
 
-    public void SetResources(Resource resource)
+    public void MoveToResource(Resource resource)
     {
         _currentResource = resource;
 
-        if (_coroutine != null)
+        if (_currentResource != null)
         {
-            StopCoroutine(_coroutine);
-        }
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+            }
 
-        _coroutine = StartCoroutine(GoToTarget(_currentResource.transform));
+            _coroutine = StartCoroutine(GoToTarget(_currentResource.transform));
+        }
     }
 
-    public void SetFlag(Flag flag)
+    public void MoveToFlag(Flag flag)
     {
         _flag = flag;
 
@@ -54,7 +68,7 @@ public class Unit : MonoBehaviour
 
     public void SendCreateNewBase()
     {
-        _createNewBase = true;
+        _isCreateNewBase = true;
     }
 
     private void PutInUnit(Resource resource)
@@ -75,39 +89,33 @@ public class Unit : MonoBehaviour
 
     private void TakeResource(Collider collision)
     {
-        if (collision.TryGetComponent(out Resource resource) && resource == _currentResource)
+        PutInUnit(_currentResource);
+        _hasResource = true;
+
+        if (_coroutine != null)
         {
-            PutInUnit(_currentResource);
-            _hasResource = true;
-
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-            }
-
-            _coroutine = StartCoroutine(GoToTarget(_base.transform));
+            StopCoroutine(_coroutine);
         }
+
+        _coroutine = StartCoroutine(GoToTarget(_base.transform));
     }
 
-    private void PutInBase(Collider collision)
+    private void PutInBase(Base basePoint)
     {
-        if (collision.TryGetComponent(out Base basePoint) && _hasResource)
-        {
-            _currentResource.transform.parent = null;
-            _hasResource = false;
-            basePoint.AddFreeBot(this);
-            gameObject.SetActive(false);
-        }
+        StopAllCoroutines();
+        _currentResource.transform.parent = null;
+        _hasResource = false;
+        basePoint.AddFreeBot(this);
+        gameObject.SetActive(false);
     }
 
-    private void TakeFlag(Collider collision)
+    private void TakeFlag(Flag flag)
     {
-        if (collision.TryGetComponent(out Flag flag) && _createNewBase && _flag)
-        {
-            Base newBase = Instantiate(_base, _flag.transform.position, _base.transform.rotation);
-            flag.gameObject.SetActive(false);
-            newBase.AddFreeBot(this);
-            _createNewBase = false;
-        }
+        StopAllCoroutines();
+        Base newBase = Instantiate(_base, _flag.transform.position, _base.transform.rotation);
+        Destroy(flag.gameObject);
+        newBase.AddFreeBot(this);
+        SetBasePosition(newBase);
+        _isCreateNewBase = false;
     }
 }

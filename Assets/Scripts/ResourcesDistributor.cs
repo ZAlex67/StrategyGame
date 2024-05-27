@@ -6,10 +6,12 @@ public class ResourcesDistributor : MonoBehaviour
     [SerializeField] private ResourceSearch _resourceSearcher;
 
     private List<Resource> _resources;
+    private List<Resource> _resourcesAlreadyUsed;
 
     private void Awake()
     {
         _resources = new List<Resource>();
+        _resourcesAlreadyUsed = new List<Resource>();
     }
 
     private void Update()
@@ -32,17 +34,30 @@ public class ResourcesDistributor : MonoBehaviour
 
     public Resource GiveResourse()
     {
-        Resource resource = _resources[Random.Range(0, _resources.Count)];
-        _resources.Remove(resource);
+        if (_resources.Count > 0)
+        {
+            Resource resource = _resources[Random.Range(0, _resources.Count)];
+            _resources.Remove(resource);
+            _resourcesAlreadyUsed.Add(resource);
 
-        return resource;
+            return resource;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public void RemoveResource(Resource resource)
+    {
+        _resourcesAlreadyUsed.Remove(resource);
     }
 
     private void OnSearchedResources(List<Resource> resources)
     {
         foreach (Resource resource in resources)
         {
-            if (_resources.Contains(resource) == false)
+            if (_resourcesAlreadyUsed.Contains(resource) == false && _resources.Contains(resource) == false)
             {
                 _resources.Add(resource);
             }
