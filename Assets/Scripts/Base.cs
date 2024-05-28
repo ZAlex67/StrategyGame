@@ -13,14 +13,14 @@ public class Base : MonoBehaviour
     [SerializeField] private ResourcesDistributor _resourcesDistributor;
 
     private List<Unit> _units;
-    private int _maxUnit = 3;
+    private int _maxCount = 3;
     private Camera _camera;
     private Flag _flag;
     private bool _isSelected;
-    private int _unitsCount = 6;
+    private int _unitsMax = 6;
     private int _basePrice = 5;
     private int _unitPrice = 3;
-    private bool _isNewBase = false;
+    private bool _canCreateNewBase = false;
 
     private void Awake()
     {
@@ -40,21 +40,20 @@ public class Base : MonoBehaviour
 
     private void Start()
     {
-        _storage.PutResource(-_storage.ResourceNumber);
         InitUnit();
     }
 
     private void Update()
     {
-        if (_storage.ResourceNumber >= _basePrice && _flag != null && _isNewBase)
+        if (_storage.ResourceNumber >= _basePrice && _flag != null && _canCreateNewBase)
         {
             SendUnitToCreateBase();
         }
-        else if (_storage.ResourceNumber >= _unitPrice && _maxUnit < _unitsCount && _flag == null)
+        else if (_storage.ResourceNumber >= _unitPrice && _maxCount < _unitsMax && _flag == null)
         {
             CreateNewUnit();
-            _storage.PutResource(-_unitPrice);
-            _maxUnit++;
+            _storage.WithdrawResource(_unitPrice);
+            _maxCount++;
         }
         else
         {
@@ -64,12 +63,10 @@ public class Base : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        int _resourceNumber = 1;
-
         if (collision.TryGetComponent(out Resource resource))
         {
             _spawner.ReleaseResourse(resource);
-            _storage.PutResource(_resourceNumber);
+            _storage.PutResource();
             _resourcesDistributor.RemoveResource(resource);
         }
     }
@@ -80,16 +77,9 @@ public class Base : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            if (hit.collider.TryGetComponent(out Base basePoint) && _isSelected == false)
+            if (hit.collider.TryGetComponent(out Base basePoint) && basePoint == this)
             {
-                if (_isSelected)
-                {
-                    _isSelected = false;
-                }
-                else
-                {
-                    _isSelected = true;
-                }
+                _isSelected = !_isSelected;
             }
         }
     }
@@ -101,7 +91,7 @@ public class Base : MonoBehaviour
 
     public void CreateNewBase()
     {
-        _isNewBase = false;
+        _canCreateNewBase = false;
     }
 
     private void OnClickedTarrain(RaycastHit raycastHit)
@@ -117,7 +107,7 @@ public class Base : MonoBehaviour
                 _flag.transform.position = raycastHit.point;
             }
 
-            _isNewBase = true;
+            _canCreateNewBase = true;
             _isSelected = false;
         }
     }
@@ -129,9 +119,8 @@ public class Base : MonoBehaviour
             Unit unit = _units[Random.Range(0, _units.Count)];
             _units.Remove(unit);
 
-            _isNewBase = false;
-            _storage.PutResource(-_basePrice);
-            unit.SendCreateNewBase();
+            _canCreateNewBase = false;
+            _storage.WithdrawResource(_basePrice);
             unit.gameObject.SetActive(true);
             unit.MoveToFlag(_flag);
         }
@@ -156,7 +145,7 @@ public class Base : MonoBehaviour
 
     private void InitUnit()
     {
-        for (int i = 0; i < _maxUnit; i++)
+        for (int i = 0; i < _maxCount; i++)
         {
             Unit unit = Instantiate(_unit, _spawnPoint);
             _units.Add(unit);

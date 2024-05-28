@@ -10,7 +10,7 @@ public class ResourceSearch : MonoBehaviour
     private float _radius = 100f;
 
     public event Action<List<Resource>> SearchedResources;
-    
+
     public void MapInspection()
     {
         List<Resource> resources = new List<Resource>();
@@ -22,8 +22,9 @@ public class ResourceSearch : MonoBehaviour
             if (sphere.TryGetComponent(out Resource resource))
             {
                 resources.Add(resource);
-                SearchedResources?.Invoke(resources);
             }
         }
+
+        SearchedResources?.Invoke(resources);
     }
 }

@@ -14,14 +14,6 @@ public class ResourcesDistributor : MonoBehaviour
         _resourcesAlreadyUsed = new List<Resource>();
     }
 
-    private void Update()
-    {
-        if (_resources.Count == 0)
-        {
-            _resourceSearcher.MapInspection();
-        }
-    }
-
     private void OnEnable()
     {
         _resourceSearcher.SearchedResources += OnSearchedResources;
@@ -30,6 +22,14 @@ public class ResourcesDistributor : MonoBehaviour
     private void OnDisable()
     {
         _resourceSearcher.SearchedResources -= OnSearchedResources;
+    }
+
+    private void Update()
+    {
+        if (_resources.Count == 0)
+        {
+            _resourceSearcher.MapInspection();
+        }
     }
 
     public Resource GiveResourse()

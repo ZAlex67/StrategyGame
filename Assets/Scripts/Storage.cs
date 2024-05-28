@@ -7,13 +7,23 @@ public class Storage : MonoBehaviour
 
     public event Action<int> NumberChanged;
 
-    public void PutResource(int resourceNumber)
+    private void Start()
     {
-        int resource = 1;
+        ResourceNumber = 0;
+        NumberChanged?.Invoke(ResourceNumber);
+    }
 
-        if (ResourceNumber >= resourceNumber || resourceNumber == resource)
+    public void PutResource()
+    {
+        ResourceNumber++;
+        NumberChanged?.Invoke(ResourceNumber);
+    }
+
+    public void WithdrawResource(int resourceNumber)
+    {
+        if (ResourceNumber >= resourceNumber)
         {
-            ResourceNumber += resourceNumber;
+            ResourceNumber -= resourceNumber;
             NumberChanged?.Invoke(ResourceNumber);
         }
     }

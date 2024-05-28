@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class TerrainSearcher : MonoBehaviour
 {
-    public Action<RaycastHit> ClickedTerrain;
-
     private Camera _camera;
+
+    public event Action<RaycastHit> ClickedTerrain;
 
     private void Awake()
     {

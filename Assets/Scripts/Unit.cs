@@ -10,7 +10,6 @@ public class Unit : MonoBehaviour
     private Resource _currentResource;
     private Base _base;
     private Flag _flag;
-    private bool _isCreateNewBase = false;
     private Coroutine _coroutine;
 
     private void OnTriggerEnter(Collider collision)
@@ -25,7 +24,7 @@ public class Unit : MonoBehaviour
             PutInBase(basePoint);
         }
 
-        if (collision.TryGetComponent(out Flag flag) && _isCreateNewBase && flag == _flag)
+        if (collision.TryGetComponent(out Flag flag) && flag == _flag)
         {
             TakeFlag(flag);
         }
@@ -66,11 +65,6 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public void SendCreateNewBase()
-    {
-        _isCreateNewBase = true;
-    }
-
     private void PutInUnit(Resource resource)
     {
         resource.transform.parent = _bagPoint;
@@ -102,7 +96,7 @@ public class Unit : MonoBehaviour
 
     private void PutInBase(Base basePoint)
     {
-        StopAllCoroutines();
+        StopCoroutine(_coroutine);
         _currentResource.transform.parent = null;
         _hasResource = false;
         basePoint.AddFreeBot(this);
@@ -111,11 +105,10 @@ public class Unit : MonoBehaviour
 
     private void TakeFlag(Flag flag)
     {
-        StopAllCoroutines();
+        StopCoroutine(_coroutine);
         Base newBase = Instantiate(_base, _flag.transform.position, _base.transform.rotation);
         Destroy(flag.gameObject);
         newBase.AddFreeBot(this);
         SetBasePosition(newBase);
-        _isCreateNewBase = false;
     }
 }
